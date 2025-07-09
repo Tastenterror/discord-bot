@@ -23,4 +23,4 @@ async def on_guild_channel_create(channel):
             await channel.send(frage)
             await asyncio.sleep(1.5)  # 1,5 Sekunden Pause dazwischen
 
-bot.run("DEIN_BOT_TOKEN_HIER")
+bot.run("DEIN_TOKEN")
