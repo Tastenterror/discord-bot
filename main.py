@@ -9,7 +9,6 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 fragen_liste = [
-    "👋 Willkommen! Bitte beantworte folgende Fragen:",
     "1️⃣ Wie lautet dein Ingame-Name?",
     "2️⃣ Was ist dein Anliegen?",
     "3️⃣ Seit wann besteht das Problem?",
@@ -23,11 +22,12 @@ async def on_ready():
 @bot.event
 async def on_guild_channel_create(channel):
     if isinstance(channel, discord.TextChannel) and "ticket" in channel.name.lower():
-        for frage in fragen_liste:
-            try:
+        try:
+            await channel.send("👋 Willkommen! Bitte beantworte folgende Fragen:")
+            for frage in fragen_liste:
                 await channel.send(frage)
-            except Exception as e:
-                print(f"Fehler beim Senden in {channel.name}: {e}")
+        except Exception as e:
+            print(f"Fehler beim Senden: {e}")
 
 token = os.getenv("TOKEN")
 if not token:
